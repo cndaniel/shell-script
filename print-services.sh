@@ -4,6 +4,12 @@
 set -e
 set -o pipefail
 
+if [ $# -eq 0 ]; then
+  echo "Please provide the name of the services directory."
+  # exit
+  exit 64
+fi
+
 print_services(){
   if grep -q port "$1" && grep -q name "$1"; then
     name=$(grep name "$1" | sed 's/name //')
