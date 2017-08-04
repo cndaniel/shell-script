@@ -5,7 +5,7 @@ set -e
 set -o pipefail
 
 for file in services/*.service; do
-  if grep port "$file"; then
+  if grep -q port "$file"; then
     echo "$file" 
   fi
 done
