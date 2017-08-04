@@ -8,6 +8,6 @@ for file in services/*.service; do
   if grep -q port "$file" && grep -q name "$file"; then
     name=$(grep name "$file" | sed 's/name //')
     port=$(grep port "$file" | sed 's/port //')
-    echo "$file $name $port"
+    echo "In $file, we're running  $name on $port"
   fi
 done
