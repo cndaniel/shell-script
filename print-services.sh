@@ -3,6 +3,7 @@
 
 set -e
 set -o pipefail
+
 print_services(){
   if grep -q port "$1" && grep -q name "$1"; then
     name=$(grep name "$1" | sed 's/name //')
@@ -16,7 +17,7 @@ print_services(){
   fi
 }
 
-for file in services/*.service; do
+for file in "$1"/*.service; do
   print_services "$file"
 done
 
