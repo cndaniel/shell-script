@@ -9,5 +9,7 @@ for file in services/*.service; do
     name=$(grep name "$file" | sed 's/name //')
     port=$(grep port "$file" | sed 's/port //')
     echo "In $file, we're running  $name on $port"
+  else
+    echo "$file does not have a name or a port."
   fi
 done
