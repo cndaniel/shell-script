@@ -3,16 +3,20 @@
 
 set -e
 set -o pipefail
-
-for file in services/*.service; do
-  if grep -q port "$file" && grep -q name "$file"; then
-    name=$(grep name "$file" | sed 's/name //')
-    port=$(grep port "$file" | sed 's/port //')
+print_services(){
+  if grep -q port "$1" && grep -q name "$1"; then
+    name=$(grep name "$1" | sed 's/name //')
+    port=$(grep port "$1" | sed 's/port //')
     if [ "$port" -lt 5000 ]; then
       echo "Port is under 5000."
     fi
-    echo "In $file, we're running  $name on $port"
+    echo "In $1, we're running  $name on $port"
   else
-    echo "$file does not have a name or a port."
+    echo "$1 does not have a name or a port."
   fi
+}
+
+for file in services/*.service; do
+  print_services "$file"
 done
+
